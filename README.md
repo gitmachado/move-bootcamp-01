@@ -1,48 +1,48 @@
 # Move Bootcamp Project
 
-Este é um projeto desenvolvido durante o bootcamp de Move, demonstrando conceitos fundamentais da linguagem Move na blockchain Sui.
+This is a project developed during the Move bootcamp, demonstrating fundamental concepts of the Move language on the Sui blockchain.
 
-## Estrutura do Projeto
+## Project Structure
 
 ```
 move_bootcamp_01/
-├── Move.toml           # Configuração do projeto Move
-├── sources/            # Código fonte principal
+├── Move.toml           # Move project configuration
+├── sources/            # Main source code
 │   └── move_bootcamp_01.move
-├── tests/              # Testes do projeto
+├── tests/              # Project tests
 │   └── move_bootcamp_01_tests.move
-└── build/              # Arquivos de build (ignorado pelo git)
+└── build/              # Build files (ignored by git)
 ```
 
-## Pré-requisitos
+## Prerequisites
 
-- [Sui CLI](https://docs.sui.io/build/install) instalado
-- [Move CLI](https://github.com/move-language/move) (incluído com Sui)
+- [Sui CLI](https://docs.sui.io/build/install) installed
+- [Move CLI](https://github.com/move-language/move) (included with Sui)
 
-## Como usar
+## How to Use
 
-### Build do projeto
+### Build the project
 
 ```bash
 sui move build
 ```
 
-### Executar testes
+### Run tests
 
 ```bash
 sui move test
 ```
 
-## Sobre o Move
+## About Move
 
-Move é uma linguagem de programação segura e expressiva para smart contracts, originalmente desenvolvida pelo Facebook para o projeto Libra/Diem. A Sui blockchain utiliza uma versão adaptada do Move otimizada para seu modelo de execução baseado em objetos.
+Move is a secure and expressive programming language for smart contracts, originally developed by Facebook for the Libra/Diem project. The Sui blockchain uses an adapted version of Move optimized for its object-based execution model.
 
-## Recursos Úteis
+## Useful Resources
 
-- [Documentação oficial do Sui](https://docs.sui.io/)
+- [Official Sui Documentation](https://docs.sui.io/)
 - [Move Book](https://move-language.github.io/move/)
 - [Sui Move by Example](https://examples.sui.io/)
 
-## Licença
+## License
 
-Este projeto é para fins educacionais.
+This project is for educational purposes.
