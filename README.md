@@ -37,12 +37,6 @@ sui move test
 
 Move is a secure and expressive programming language for smart contracts, originally developed by Facebook for the Libra/Diem project. The Sui blockchain uses an adapted version of Move optimized for its object-based execution model.
 
-## Useful Resources
-
-- [Official Sui Documentation](https://docs.sui.io/)
-- [Move Book](https://move-language.github.io/move/)
-- [Sui Move by Example](https://examples.sui.io/)
-
 ## License
 
 This project is for educational purposes.
