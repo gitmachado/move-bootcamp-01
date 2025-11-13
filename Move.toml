@@ -5,7 +5,11 @@ edition = "2024.beta" # edition = "legacy" to use legacy (pre-2024) Move
 # authors = ["..."]      # e.g., ["Joe Smith (joesmith@noemail.com)", "John Snow (johnsnow@noemail.com)"]
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+# Sui framework dependency is intentionally omitted here to allow the toolchain
+# to auto-include the correct framework dependencies. Including an explicit
+# git dependency can cause version/address mismatches that lead to verifier
+# errors during testing. If you need to pin a specific framework version,
+# re-add it carefully.
 
 [addresses]
 move_bootcamp_01 = "0x0"

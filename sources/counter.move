@@ -1,47 +1,64 @@
 module move_bootcamp_01::counter {
-  use std::debug::print;
+  // módulos do framework (sui::tx_context e sui::object) estão disponíveis por padrão
 
-  public struct Counter has drop {
+  /// Pequeno contrato de contador on-chain.
+  /// Este módulo define um objeto `Counter` com `has key` para que seja um
+  /// objeto armazenado na blockchain. Funções públicas permitem criar e
+  /// manipular o contador de forma segura (somente o proprietário).
+  public struct Counter has key, store {
+    id: UID,
+    owner: address,
     current: u64,
     target: u64,
   }
 
-  #[error]
-  const ECOUNTER_OVERFLOW: u8 = 1;
+  /// Erros
+  const ECOUNTER_OVERFLOW: u64 = 1;
+  const E_NOT_OWNER: u64 = 2;
 
-  fun new(target: u64): Counter {
-    Counter { current: 0, target: target }
+  /// Cria um novo Counter on-chain. O remetente da transação será o `owner`.
+  /// Retorna o objeto Counter recém-criado (o chamador recebe a posse).
+  public fun create_counter(target: u64, ctx: &mut TxContext): Counter {
+    let owner = tx_context::sender(ctx);
+    Counter {
+      id: object::new(ctx),
+      owner,
+      current: 0,
+      target,
+    }
   }
 
-  fun increment(counter: &mut Counter){
+  /// Incrementa o contador. Apenas o proprietário pode chamar.
+  public fun increment(counter: &mut Counter, ctx: &mut TxContext) {
+    let sender = tx_context::sender(ctx);
+    assert!(sender == counter.owner, E_NOT_OWNER);
     assert!(counter.current < counter.target, ECOUNTER_OVERFLOW);
     counter.current = counter.current + 1;
   }
 
-  fun get_current(counter: &Counter): u64 {
-    print(&counter.current);
+  /// Lê o valor atual do contador (view-read).
+  public fun get_current(counter: &Counter): u64 {
     counter.current
   }
 
-  fun is_completed(counter: &Counter): bool {
+  /// Verifica se o contador atingiu o alvo
+  public fun is_completed(counter: &Counter): bool {
     counter.current == counter.target
   }
 
-  fun reset(counter: &mut Counter) {
-    counter.current = 0
+  /// Reseta o contador para zero (somente owner)
+  public fun reset(counter: &mut Counter, ctx: &mut TxContext) {
+    let sender = tx_context::sender(ctx);
+    assert!(sender == counter.owner, E_NOT_OWNER);
+    counter.current = 0;
   }
 
-  fun play_counter(counter: &mut Counter): () {
-    while (!is_completed(counter)) {
-      get_current(counter);
-      increment(counter);
-    };
-    reset(counter);
-  }
-
-  #[test]
-  fun test_main(){
-    let mut counter = new(10);
-    play_counter(&mut counter)
+  /// Transferir posse do contador para outro endereço (owner only)
+  /// Transfere a posse do objeto Counter para outro endereço.
+  /// Apenas o owner atual pode chamar. Modifica o objeto na hora (in-place).
+  public fun transfer(counter: &mut Counter, new_owner: address, ctx: &mut TxContext) {
+    let sender = tx_context::sender(ctx);
+    assert!(sender == counter.owner, E_NOT_OWNER);
+    counter.owner = new_owner;
   }
 }

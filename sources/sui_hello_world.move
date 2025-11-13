@@ -1,9 +1,8 @@
-/// Module: sui_hello_world
+/// Módulo: sui_hello_world
 module move_bootcamp_01::sui_hello_world {
     use std::debug::print;
     use std::string::utf8;
-
-    /// Function to print the Sui logo
+    /// Função para imprimir o logo do Sui
     public fun print_sui_logo() {
         print(&utf8(b"===================================================================================================="));
         print(&utf8(b"===================================================================================================="));
@@ -62,7 +61,7 @@ module move_bootcamp_01::sui_hello_world {
         print(&utf8(b"===================================================================================================="));
     }
 
-    /// Hello World function with Sui logo
+    /// Função Hello World (imprime mensagem com o logo do Sui)
     public fun hello_sui() {
         print(&utf8(b"Hello, Sui Blockchain! 💧"));
     }
