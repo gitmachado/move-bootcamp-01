@@ -2,18 +2,6 @@
 
 This is a project developed during the Move bootcamp, demonstrating fundamental concepts of the Move language on the Sui blockchain.
 
-## Project Structure
-
-```
-move_bootcamp_01/
-├── Move.toml           # Move project configuration
-├── sources/            # Main source code
-│   └── move_bootcamp_01.move
-├── tests/              # Project tests
-│   └── move_bootcamp_01_tests.move
-└── build/              # Build files (ignored by git)
-```
-
 ## Prerequisites
 
 - [Sui CLI](https://docs.sui.io/build/install) installed
